@@ -9,12 +9,12 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^4.0.0",
-    "astro-seo": "^0.8.0",
     "@astrojs/sitemap": "^3.0.0",
-    "dotenv": "^16.3.0"
+    "astro": "^4.0.0",
+    "astro-seo": "^0.8.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.40.0"
+    "@playwright/test": "^1.40.0",
+    "dotenv": "^17.3.1"
   }
 }
