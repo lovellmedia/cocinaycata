@@ -1,0 +1,154 @@
+---
+export interface Props {
+  title?: string;
+}
+
+const { title = "Cocina y Cata" } = Astro.props;
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { path: "/", label: "Home" },
+  { path: "/spanish-rice-dishes/", label: "Overview" },
+  { path: "/spanish-rice-dishes/history/", label: "History" },
+  { path: "/spanish-rice-dishes/technical-deep-dive/", label: "Technical" },
+  { path: "/spanish-rice-dishes/ontology/", label: "Ontology" },
+  { path: "/spanish-rice-dishes/trends/", label: "Trends" },
+  { path: "/spanish-rice-dishes/tools/", label: "Tools" },
+  { path: "/spanish-rice-dishes/challenges/", label: "Challenges" }
+];
+---
+
+<header>
+  <nav>
+    <div class="nav-container">
+      <a href="/" class="logo">{title}</a>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu" onclick="toggleMobileMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        {navItems.map(item => (
+          <li>
+            <a 
+              href={item.path} 
+              class={currentPath === item.path || currentPath.startsWith(item.path) && item.path !== "/" ? "active" : ""}
+            >
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </nav>
+</header>
+
+<script is:inline>
+  function toggleMobileMenu() {
+    const navMenu = document.getElementById('navMenu');
+    navMenu.classList.toggle('active');
+  }
+</script>
+
+<style>
+  nav {
+    background: #ffffff;
+    padding: 1.25rem 0;
+    border-bottom: 2px solid #d4d0c8;
+  }
+
+  .nav-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .logo {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #2b2b2b;
+    text-decoration: none;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+
+  .nav-menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-menu a {
+    color: #5a5a5a;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+    font-family: 'Lato', -apple-system, sans-serif;
+  }
+
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    color: #2b2b2b;
+    font-weight: 600;
+  }
+
+  .mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+  }
+
+  .mobile-menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background: #2b2b2b;
+    margin: 3px 0;
+    transition: 0.3s;
+  }
+
+  @media (max-width: 968px) {
+    .nav-container {
+      padding: 0 1.5rem;
+    }
+
+    .mobile-menu-toggle {
+      display: flex;
+    }
+
+    .nav-menu {
+      display: none;
+      position: absolute;
+      top: 70px;
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      flex-direction: column;
+      padding: 1.5rem;
+      border-bottom: 2px solid #d4d0c8;
+      gap: 1rem;
+    }
+
+    .nav-menu.active {
+      display: flex;
+    }
+
+    .nav-menu li {
+      width: 100%;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid #e8e6e0;
+    }
+  }
+</style>

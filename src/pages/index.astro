@@ -1,0 +1,367 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const title = "Cocina y Cata - Spanish Cuisine Recipes";
+const description = "Discover the authentic art of Spanish rice cuisine. Research-backed techniques, traditional recipes, and culinary science for perfect paella and regional Spanish rice dishes.";
+
+const pillarPages = [
+  {
+    title: "Overview",
+    description: "Introduction to Spanish rice culture, key varieties, essential equipment, and regional distinctions.",
+    url: "/spanish-rice-dishes/",
+    icon: "01"
+  },
+  {
+    title: "History & Evolution",
+    description: "From Moorish origins to modern paella. The 1,200-year journey of Spanish rice cuisine.",
+    url: "/spanish-rice-dishes/history/",
+    icon: "02"
+  },
+  {
+    title: "Technical Deep-Dive",
+    description: "The science of socarrat, starch gelatinization, heat distribution, and perfect rice texture.",
+    url: "/spanish-rice-dishes/technical-deep-dive/",
+    icon: "03"
+  },
+  {
+    title: "Ontology & Knowledge Base",
+    description: "Comprehensive glossary: bomba rice, garrofón, señoret, and the complete vocabulary of Spanish rice.",
+    url: "/spanish-rice-dishes/ontology/",
+    icon: "04"
+  },
+  {
+    title: "Current Trends",
+    description: "Modern interpretations, sustainable sourcing, Michelin-starred innovations, and the future of Spanish rice.",
+    url: "/spanish-rice-dishes/trends/",
+    icon: "05"
+  },
+  {
+    title: "Tools & Resources",
+    description: "Interactive calculators, conversion tools, and practical guides for authentic Spanish rice cooking.",
+    url: "/spanish-rice-dishes/tools/",
+    icon: "06"
+  },
+  {
+    title: "Common Challenges",
+    description: "Solutions for mushy rice, socarrat mastery, scaling recipes, and sourcing authentic ingredients.",
+    url: "/spanish-rice-dishes/challenges/",
+    icon: "07"
+  }
+];
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="hero">
+    <div class="container">
+      <div class="hero-label">Culinary Research & Practice</div>
+      <h1>The Art and Science of Spanish Rice Cuisine</h1>
+      <p class="hero-subtitle">Authentic techniques, traditional knowledge, and modern culinary science for mastering Spain's iconic rice dishes</p>
+      <div class="hero-meta">
+        <span>Traditional Methods</span>
+        <span>|</span>
+        <span>Scientific Approach</span>
+        <span>|</span>
+        <span>Regional Authenticity</span>
+      </div>
+      <a href="/spanish-rice-dishes/" class="hero-cta">Explore Spanish Rice Dishes</a>
+    </div>
+  </div>
+
+  <section class="intro">
+    <div class="container">
+      <div class="abstract">
+        <h3>About This Research</h3>
+        <p>Cocina y Cata presents a comprehensive exploration of Spanish rice cuisine, combining centuries-old traditions with contemporary culinary science. Our research examines the techniques, ingredients, and cultural significance of Spain's most iconic rice dishes—from the sacred paella Valenciana to the lesser-known regional treasures of Murcia, Catalonia, and beyond.</p>
+        <p>Drawing from historical records, scientific literature, and interviews with traditional cooks and modern chefs, this resource offers both the home cook and the culinary professional authoritative guidance on achieving authentic results. We cover everything from the biochemistry of starch gelatinization to the social rituals of the Spanish rice table.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pillars">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-number">Research Sections</div>
+        <h2 class="section-title">Explore Spanish Rice Cuisine</h2>
+        <p class="section-description">Seven comprehensive pillars covering every aspect of traditional Spanish rice cooking</p>
+      </div>
+
+      <div class="pillar-grid">
+        {pillarPages.map((page) => (
+          <a href={page.url} class="pillar-card">
+            <div class="pillar-icon">{page.icon}</div>
+            <h3>{page.title}</h3>
+            <p>{page.description}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="features">
+    <div class="container">
+      <div class="feature-grid">
+        <div class="feature-box">
+          <h4>Traditional Knowledge</h4>
+          <p>Documentation of authentic techniques passed through generations of Spanish cooks, preserved and explained for modern kitchens.</p>
+        </div>
+        <div class="feature-box">
+          <h4>Scientific Foundation</h4>
+          <p>Understanding the chemistry and physics behind perfect rice—from starch gelatinization temperatures to socarrat formation.</p>
+        </div>
+        <div class="feature-box">
+          <h4>Regional Diversity</h4>
+          <p>Beyond paella: exploring arroz negro, arroz caldoso, arroz al horno, and the distinct rice cultures of Spain's regions.</p>
+        </div>
+        <div class="feature-box">
+          <h4>Practical Tools</h4>
+          <p>Interactive calculators and conversion tools to help you scale recipes, time your cooking, and achieve consistent results.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    background: #ffffff;
+    padding: 5rem 3rem;
+    border-bottom: 1px solid #e8e6e0;
+  }
+
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .hero .container {
+    text-align: center;
+  }
+
+  .hero-label {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.75rem;
+    color: #8a8a8a;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 3.25rem;
+    font-weight: 700;
+    line-height: 1.3;
+    color: #1a1a1a;
+    margin-bottom: 2rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.35rem;
+    color: #5a5a5a;
+    font-weight: 400;
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero-meta {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.9rem;
+    color: #8a8a8a;
+    margin-bottom: 3rem;
+  }
+
+  .hero-meta span {
+    margin: 0 1rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: #2b2b2b;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background 0.2s;
+  }
+
+  .hero-cta:hover {
+    background: #4a4a4a;
+  }
+
+  .intro {
+    padding: 4rem 3rem;
+    background: #fdfcfa;
+  }
+
+  .abstract {
+    background: #ffffff;
+    padding: 3rem;
+    border: 1px solid #e8e6e0;
+  }
+
+  .abstract h3 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #2b2b2b;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .abstract p {
+    font-size: 1.1rem;
+    color: #3a3a3a;
+    margin-bottom: 1.25rem;
+    line-height: 1.8;
+    text-align: justify;
+  }
+
+  .abstract p:last-child {
+    margin-bottom: 0;
+  }
+
+  .pillars {
+    padding: 4.5rem 3rem;
+    background: #ffffff;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-number {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.8rem;
+    color: #a8a8a8;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-description {
+    font-size: 1.2rem;
+    color: #5a5a5a;
+    max-width: 650px;
+    margin: 0 auto;
+    font-style: italic;
+  }
+
+  .pillar-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+  }
+
+  .pillar-card {
+    background: #f8f7f5;
+    padding: 2rem;
+    border: 1px solid #e8e6e0;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s;
+  }
+
+  .pillar-card:hover {
+    border-color: #2b2b2b;
+    box-shadow: 4px 4px 0 #2b2b2b;
+    transform: translate(-2px, -2px);
+  }
+
+  .pillar-icon {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #2b2b2b;
+    margin-bottom: 1rem;
+    line-height: 1;
+  }
+
+  .pillar-card h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 0.75rem;
+  }
+
+  .pillar-card p {
+    color: #5a5a5a;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .features {
+    padding: 4rem 3rem;
+    background: #f8f7f5;
+    border-top: 1px solid #e8e6e0;
+  }
+
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .feature-box {
+    background: #ffffff;
+    border: 1px solid #e8e6e0;
+    padding: 2rem;
+  }
+
+  .feature-box h4 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #2b2b2b;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .feature-box p {
+    color: #5a5a5a;
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  @media (max-width: 968px) {
+    .hero {
+      padding: 3rem 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: 2.25rem;
+    }
+
+    .intro,
+    .pillars,
+    .features {
+      padding: 3rem 1.5rem;
+    }
+
+    .abstract {
+      padding: 2rem;
+    }
+
+    .pillar-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

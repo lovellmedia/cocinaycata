@@ -1,0 +1,113 @@
+---
+const currentYear = new Date().getFullYear();
+const domain = "cocinaycata.com";
+---
+
+<footer>
+  <div class="footer-container">
+    <div class="footer-main">
+      <div>
+        <h4>Cocina y Cata</h4>
+        <p>Authentic Spanish culinary research and traditional rice cooking techniques. Exploring the science, history, and art of Spain's iconic rice dishes.</p>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="/spanish-rice-dishes/">Overview</a></li>
+          <li><a href="/spanish-rice-dishes/history/">History</a></li>
+          <li><a href="/spanish-rice-dishes/technical-deep-dive/">Technical Guide</a></li>
+          <li><a href="/spanish-rice-dishes/tools/">Tools</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="/spanish-rice-dishes/ontology/">Glossary</a></li>
+          <li><a href="/spanish-rice-dishes/trends/">Current Trends</a></li>
+          <li><a href="/spanish-rice-dishes/challenges/">Common Challenges</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; {currentYear} {domain}. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background: #2b2b2b;
+    color: #c4c4c4;
+    padding: 3rem 3rem 2rem;
+    border-top: 4px solid #1a1a1a;
+  }
+
+  .footer-container {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .footer-main {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 3rem;
+    margin-bottom: 2rem;
+  }
+
+  h4 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    color: #ffffff;
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #a0a0a0;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    margin-bottom: 0.75rem;
+  }
+
+  a {
+    color: #c4c4c4;
+    text-decoration: none;
+    transition: color 0.2s;
+    font-size: 0.95rem;
+  }
+
+  a:hover {
+    color: #ffffff;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #4a4a4a;
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    color: #8a8a8a;
+  }
+
+  @media (max-width: 968px) {
+    footer {
+      padding: 2rem 1.5rem;
+    }
+
+    .footer-main {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

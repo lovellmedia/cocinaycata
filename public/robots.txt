@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://cocinaycata.com/sitemap-index.xml

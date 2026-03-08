@@ -1,0 +1,103 @@
+---
+export interface Props {
+  relatedTopics?: Array<{ title: string; url: string }>;
+  keyPoints?: string[];
+}
+
+const { relatedTopics = [], keyPoints = [] } = Astro.props;
+---
+
+<aside class="sidebar">
+  {keyPoints.length > 0 && (
+    <div class="sidebar-box">
+      <h4>Key Points</h4>
+      <ul>
+        {keyPoints.map(point => (
+          <li>{point}</li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+  {relatedTopics.length > 0 && (
+    <div class="sidebar-box">
+      <h4>Related Pages</h4>
+      <ul class="related-links">
+        {relatedTopics.map(topic => (
+          <li><a href={topic.url}>{topic.title}</a></li>
+        ))}
+      </ul>
+    </div>
+  )}
+  
+  <div class="sidebar-box">
+    <h4>About This Site</h4>
+    <p>Cocina y Cata is dedicated to the authentic study and practice of Spanish rice cuisine, combining traditional knowledge with modern culinary science.</p>
+  </div>
+</aside>
+
+<style>
+  .sidebar {
+    position: sticky;
+    top: 2rem;
+  }
+
+  .sidebar-box {
+    background: #f8f7f5;
+    padding: 1.5rem;
+    border: 1px solid #e8e6e0;
+    margin-bottom: 1.5rem;
+  }
+
+  .sidebar-box h4 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #2b2b2b;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+
+  .sidebar-box ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-box li {
+    padding: 0.5rem 0;
+    color: #5a5a5a;
+    font-size: 0.95rem;
+    border-bottom: 1px solid #e8e6e0;
+    line-height: 1.5;
+  }
+
+  .sidebar-box li:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-box p {
+    font-size: 0.9rem;
+    color: #5a5a5a;
+    line-height: 1.7;
+  }
+
+  .related-links a {
+    color: #5a5a5a;
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .related-links a:hover {
+    color: #2b2b2b;
+    text-decoration: underline;
+  }
+
+  @media (max-width: 968px) {
+    .sidebar {
+      position: relative;
+      top: 0;
+    }
+  }
+</style>

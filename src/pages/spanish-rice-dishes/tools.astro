@@ -1,0 +1,444 @@
+---
+import TopicLayout from '../../layouts/TopicLayout.astro';
+
+const title = "Tools & Resources for Spanish Rice Cooking | Cocina y Cata";
+const description = "Interactive calculators, conversion tools, and practical guides for authentic Spanish rice cooking. Rice calculators, paellera size selectors, and timing guides.";
+
+const keyPoints = [
+  "Interactive rice-to-liquid calculators for different preparation styles",
+  "Paellera size selector based on serving requirements",
+  "Cooking time estimators with altitude adjustments",
+  "Unit converters for metric to imperial measurements"
+];
+
+const relatedTopics = [
+  { title: "Technical Deep-Dive", url: "/spanish-rice-dishes/technical-deep-dive/" },
+  { title: "Common Challenges", url: "/spanish-rice-dishes/challenges/" },
+  { title: "Ontology & Glossary", url: "/spanish-rice-dishes/ontology/" }
+];
+---
+
+<TopicLayout 
+  title={title} 
+  description={description}
+  topic="Spanish Rice Dishes"
+  pillar="Tools & Resources"
+  keyPoints={keyPoints}
+  relatedTopics={relatedTopics}
+>
+  <p>Successful Spanish rice cooking requires precision—in ingredient ratios, timing, and equipment selection. These interactive tools help calculate quantities, select appropriate equipment, and plan your cooking process. While traditional cooks developed intuition through years of practice, these tools provide data-driven guidance for consistent results.</p>
+
+  <h3>Rice & Liquid Calculator</h3>
+
+  <p>Calculate precise quantities for any number of servings and preparation style:</p>
+
+  <div class="tool-container">
+    <h4>Spanish Rice Calculator</h4>
+    <div class="calculator-form">
+      <div class="form-group">
+        <label for="servings">Number of Servings:</label>
+        <input type="number" id="servings" min="1" max="50" value="4" onchange="calculateRice()">
+      </div>
+      <div class="form-group">
+        <label for="style">Preparation Style:</label>
+        <select id="style" onchange="calculateRice()">
+          <option value="paella">Paella (Dry)</option>
+          <option value="meloso">Arroz Meloso (Creamy)</option>
+          <option value="caldoso">Arroz Caldoso (Soupy)</option>
+          <option value="horno">Arroz al Horno (Baked)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="riceType">Rice Variety:</label>
+        <select id="riceType" onchange="calculateRice()">
+          <option value="bomba">Bomba (High absorption)</option>
+          <option value="senia">Senia/Bahia (Medium)</option>
+          <option value="standard">Standard short-grain</option>
+        </select>
+      </div>
+      <div class="results" id="riceResults">
+        <p><strong>Rice needed:</strong> <span id="riceAmount">400</span> grams</p>
+        <p><strong>Liquid needed:</strong> <span id="liquidAmount">1000</span> ml (approximately)</p>
+        <p><strong>Paellera size:</strong> <span id="panSize">34-38 cm</span> diameter</p>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    function calculateRice() {
+      const servings = parseInt(document.getElementById('servings').value) || 4;
+      const style = document.getElementById('style').value;
+      const riceType = document.getElementById('riceType').value;
+      
+      // Base rice per serving: 100g
+      const baseRice = servings * 100;
+      
+      // Liquid ratios by style and rice type
+      const ratios = {
+        bomba: { paella: 2.5, meloso: 3.5, caldoso: 5, horno: 3 },
+        senia: { paella: 2.3, meloso: 3.2, caldoso: 4.5, horno: 2.8 },
+        standard: { paella: 2, meloso: 3, caldoso: 4, horno: 2.5 }
+      };
+      
+      const ratio = ratios[riceType][style];
+      const liquid = Math.round(baseRice * ratio);
+      
+      // Pan size estimation (roughly 8-10cm per person for thin layer)
+      let panSize;
+      if (servings <= 2) panSize = "26-30 cm";
+      else if (servings <= 4) panSize = "34-38 cm";
+      else if (servings <= 6) panSize = "42-46 cm";
+      else if (servings <= 10) panSize = "50-60 cm";
+      else panSize = "60+ cm (professional)";
+      
+      document.getElementById('riceAmount').textContent = baseRice;
+      document.getElementById('liquidAmount').textContent = liquid;
+      document.getElementById('panSize').textContent = panSize;
+    }
+    
+    // Initialize on load
+    calculateRice();
+  </script>
+
+  <h3>Cooking Time Estimator</h3>
+
+  <p>Plan your cooking timeline with this comprehensive time calculator:</p>
+
+  <div class="tool-container">
+    <h4>Cooking Timeline Planner</h4>
+    <div class="timeline-form">
+      <div class="form-group">
+        <label for="prepStyle">Preparation Style:</label>
+        <select id="prepStyle" onchange="calculateTime()">
+          <option value="paella">Paella (Dry)</option>
+          <option value="meloso">Arroz Meloso</option>
+          <option value="caldoso">Arroz Caldoso</option>
+          <option value="negro">Arroz Negro</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="altitude">Altitude:</label>
+        <select id="altitude" onchange="calculateTime()">
+          <option value="sea">Sea level</option>
+          <option value="medium">500-1000m (Moderate)</option>
+          <option value="high">1000m+ (High)</option>
+        </select>
+      </div>
+      <div class="time-results" id="timeResults">
+        <div class="time-block">
+          <strong>Sofrito preparation:</strong> <span id="sofritoTime">20-25 minutes</span>
+        </div>
+        <div class="time-block">
+          <strong>Stock preparation (if making fresh):</strong> <span id="stockTime">45-60 minutes</span>
+        </div>
+        <div class="time-block">
+          <strong>Rice cooking time:</strong> <span id="cookTime">18-20 minutes</span>
+        </div>
+        <div class="time-block">
+          <strong>Resting period:</strong> <span id="restTime">5-10 minutes</span>
+        </div>
+        <div class="time-block total">
+          <strong>Total active time:</strong> <span id="totalTime">43-55 minutes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script is:inline>
+    function calculateTime() {
+      const style = document.getElementById('prepStyle').value;
+      const altitude = document.getElementById('altitude').value;
+      
+      // Base times
+      let cookTime = 18;
+      if (style === 'meloso') cookTime = 20;
+      if (style === 'caldoso') cookTime = 22;
+      if (style === 'negro') cookTime = 24;
+      
+      // Altitude adjustment (longer cooking at altitude)
+      if (altitude === 'medium') cookTime += 3;
+      if (altitude === 'high') cookTime += 5;
+      
+      const cookRange = cookTime + "-" + (cookTime + 3) + " minutes";
+      
+      document.getElementById('cookTime').textContent = cookRange;
+      document.getElementById('totalTime').textContent = "43-" + (55 + (altitude === 'high' ? 5 : altitude === 'medium' ? 3 : 0)) + " minutes";
+    }
+    
+    calculateTime();
+  </script>
+
+  <h3>Temperature Conversion</h3>
+
+  <p>Quick reference for common cooking temperatures:</p>
+
+  <table class="temp-table">
+    <thead>
+      <tr>
+        <th>Cooking Stage</th>
+        <th>Celsius</th>
+        <th>Fahrenheit</th>
+        <th>Gas Mark</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Sofrito (gentle)</td>
+        <td>120°C</td>
+        <td>250°F</td>
+        <td>1/2</td>
+      </tr>
+      <tr>
+        <td>Paella cooking (medium)</td>
+        <td>180-200°C</td>
+        <td>350-390°F</td>
+        <td>4-5</td>
+      </tr>
+      <tr>
+        <td>Socarrat formation (high)</td>
+        <td>220-240°C</td>
+        <td>430-465°F</td>
+        <td>7-8</td>
+      </tr>
+      <tr>
+        <td>Oven finishing</td>
+        <td>200°C</td>
+        <td>390°F</td>
+        <td>5</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Unit Conversions</h3>
+
+  <p>Common conversions for international cooking:</p>
+
+  <div class="conversion-grid">
+    <div class="conversion-card">
+      <h4>Rice Volume</h4>
+      <ul>
+        <li>100g rice ≈ 1/2 cup (US)</li>
+        <li>1 cup rice ≈ 200g</li>
+        <li>1 kg rice ≈ 5 cups</li>
+      </ul>
+    </div>
+    <div class="conversion-card">
+      <h4>Liquid Volume</h4>
+      <ul>
+        <li>250ml ≈ 1 cup (US)</li>
+        <li>1 liter ≈ 4.2 cups</li>
+        <li>1 liter ≈ 1.06 quarts</li>
+      </ul>
+    </div>
+    <div class="conversion-card">
+      <h4>Pan Sizes</h4>
+      <ul>
+        <li>30cm ≈ 12 inches</li>
+        <li>40cm ≈ 16 inches</li>
+        <li>50cm ≈ 20 inches</li>
+      </ul>
+    </div>
+  </div>
+
+  <h3>Ingredient Substitution Guide</h3>
+
+  <p>When authentic ingredients are unavailable:</p>
+
+  <table class="substitution-table">
+    <thead>
+      <tr>
+        <th>Original Ingredient</th>
+        <th>Substitute</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bomba rice</td>
+        <td>Arborio or Carnaroli</td>
+        <td>Reduce liquid by 20%; texture differs</td>
+      </tr>
+      <tr>
+        <td>Ñora pepper</td>
+        <td>Ancho chile + smoked paprika</td>
+        <td>Soak and scrape as with ñora</td>
+      </tr>
+      <tr>
+        <td>Vaquetas (snails)</td>
+        <td>Escargots or omit</td>
+        <td>Canned escargots lack terroir</td>
+      </tr>
+      <tr>
+        <td>Ferraura beans</td>
+        <td>Flat Romano beans</td>
+        <td>Similar texture when cooked</td>
+      </tr>
+      <tr>
+        <td>Rabbit</td>
+        <td>Chicken thighs</td>
+        <td>Different but acceptable flavor</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Quality Checklist</h3>
+
+  <p>Use this checklist before serving your Spanish rice:</p>
+
+  <div class="checklist">
+    <label><input type="checkbox"> Rice grains are separate, not clumped</label>
+    <label><input type="checkbox"> No excess liquid remains (for paella style)</label>
+    <label><input type="checkbox"> Socarrat is present (golden, not black)</label>
+    <label><input type="checkbox"> Rice is tender throughout (no hard centers)</label>
+    <label><input type="checkbox"> Seasoning is adequate (taste test)</label>
+    <label><input type="checkbox"> Resting period completed</label>
+    <label><input type="checkbox"> Lemon wedges ready (if serving)</label>
+  </div>
+
+  <h3>Additional Resources</h3>
+
+  <p>For deeper understanding of the techniques these tools support:</p>
+  <ul>
+    <li><a href="/spanish-rice-dishes/technical-deep-dive/">Technical Deep-Dive</a> — The science behind the calculations</li>
+    <li><a href="/spanish-rice-dishes/challenges/">Common Challenges & Solutions</a> — Troubleshooting when tools aren't enough</li>
+    <li><a href="/spanish-rice-dishes/ontology/">Ontology & Knowledge Base</a> — Understanding the terminology</li>
+  </ul>
+</TopicLayout>
+
+<style>
+  .tool-container {
+    background: #f8f7f5;
+    border: 1px solid #e8e6e0;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+
+  .tool-container h4 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #2b2b2b;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .form-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-group label {
+    display: block;
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.9rem;
+    color: #5a5a5a;
+    margin-bottom: 0.5rem;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.75rem;
+    border: 1px solid #d4d0c8;
+    font-size: 1rem;
+    font-family: inherit;
+  }
+
+  .results {
+    background: #ffffff;
+    padding: 1.5rem;
+    border: 1px solid #e8e6e0;
+    margin-top: 1.5rem;
+  }
+
+  .results p {
+    margin-bottom: 0.75rem;
+    font-size: 1.05rem;
+  }
+
+  .results span {
+    font-weight: 600;
+    color: #2b2b2b;
+  }
+
+  .time-results {
+    background: #ffffff;
+    padding: 1.5rem;
+    border: 1px solid #e8e6e0;
+    margin-top: 1.5rem;
+  }
+
+  .time-block {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e8e6e0;
+  }
+
+  .time-block:last-child {
+    border-bottom: none;
+  }
+
+  .time-block.total {
+    font-size: 1.1rem;
+    border-top: 2px solid #2b2b2b;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+  }
+
+  .conversion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .conversion-card {
+    background: #f8f7f5;
+    padding: 1.5rem;
+    border: 1px solid #e8e6e0;
+  }
+
+  .conversion-card h4 {
+    font-family: 'Lato', -apple-system, sans-serif;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 1rem;
+  }
+
+  .conversion-card ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+
+  .conversion-card li {
+    font-size: 0.95rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .checklist {
+    background: #f8f7f5;
+    padding: 1.5rem;
+    border: 1px solid #e8e6e0;
+  }
+
+  .checklist label {
+    display: block;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #e8e6e0;
+    cursor: pointer;
+  }
+
+  .checklist label:last-child {
+    border-bottom: none;
+  }
+
+  .checklist input {
+    margin-right: 0.75rem;
+  }
+
+  .temp-table,
+  .substitution-table {
+    margin: 1.5rem 0;
+  }
+</style>
